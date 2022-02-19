@@ -7,6 +7,7 @@ import 'COL/cart_item.dart';
 import 'sliders_component/horzontal_container.dart';
 
 class CustomSlider extends StatefulWidget {
+  /// number of positioned on slider
   final int length;
   const CustomSlider({Key? key, this.length = 10}) : super(key: key);
 
@@ -15,9 +16,11 @@ class CustomSlider extends StatefulWidget {
 }
 
 class _CustomSliderState extends State<CustomSlider> {
+  /// default slider position (selected positioned)
   double slider = 6;
   @override
   Widget build(BuildContext context) {
+    ///get space between each position
     int dividers = ((context.getDeviceWidth - 20.0) ~/ widget.length).toInt();
     print(dividers);
     print(widget.length);
@@ -40,14 +43,18 @@ class _CustomSliderState extends State<CustomSlider> {
             child: Stack(
               clipBehavior: Clip.none,
               children: [
+
+                /// min slider indication
                 const SliderText(
                   text: '0',
                   leftValue: 5.0,
                 ),
+                /// max slider indication
                 SliderText(
                   text: '${widget.length}',
                   leftValue: (dividers * widget.length) + 5,
                 ),
+                /// this is where each position is placed in the stacked
                 for (int i = 0; i < widget.length + 1; i++)
                   VerticalSlider(
                       leftValue: 10.0 + (i != 0 ? (i * dividers) : 0)),
@@ -58,6 +65,8 @@ class _CustomSliderState extends State<CustomSlider> {
                   // left: 10.0,
                   child: HorizontalContainer(),
                 ),
+
+                ///selected indication (green indication)
                 AnimatedPositioned(
                   duration: const Duration(milliseconds: 500),
                   top: 0,
@@ -88,6 +97,9 @@ class _CustomSliderState extends State<CustomSlider> {
           ),
           const SizedBox(height: 30),
           TextField(
+            decoration: const InputDecoration(
+              hintText: "type value to alter slider positioned"
+            ),
             onChanged: (value) {
               setState(() {
                 slider = double.parse(value.isEmpty ? "0.0" : value);
