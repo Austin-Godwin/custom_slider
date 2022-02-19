@@ -3,6 +3,7 @@ import 'package:custom_slider/sliders_component/slider_text.dart';
 import 'package:custom_slider/sliders_component/vertical_slider.dart';
 import 'package:flutter/material.dart';
 
+import 'COL/cart_item.dart';
 import 'sliders_component/horzontal_container.dart';
 
 class CustomSlider extends StatefulWidget {
@@ -22,9 +23,16 @@ class _CustomSliderState extends State<CustomSlider> {
     print(widget.length);
 
     return Scaffold(
+      backgroundColor: Colors.grey,
       body: Column(
         children: [
-          const SizedBox(height: 200),
+          const SizedBox(height: 100),
+
+          const Padding(
+            padding: const EdgeInsets.all(20.0),
+            child:   CartItem(value: 32, isMaxed: true,),
+          ),
+          const SizedBox(height: 100),
           Container(
             padding: const EdgeInsets.symmetric(vertical: 20),
             color: Colors.black,
@@ -91,3 +99,5 @@ class _CustomSliderState extends State<CustomSlider> {
     );
   }
 }
+
+
